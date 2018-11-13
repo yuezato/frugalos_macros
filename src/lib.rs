@@ -5,7 +5,7 @@ extern crate quote;
 
 use proc_macro::TokenStream;
 
-#[allow(needless_pass_by_value)]
+#[cfg_attr(feature = "cargo-clippy", allow(clippy::needless_pass_by_value))]
 #[proc_macro_attribute]
 pub fn trace_info(_args: TokenStream, input: TokenStream) -> TokenStream {
     let parsed: syn::ItemFn = syn::parse2(input.clone().into()).unwrap();
@@ -18,9 +18,12 @@ pub fn trace_info(_args: TokenStream, input: TokenStream) -> TokenStream {
 
     let expanded = quote! {
         #vis fn #ident(#inputs) #output {
-            println!("Enter into the function `{}` [{}#line={}]", stringify!(#ident), file!(), line!()+1);
-            let result = #block ;
-            println!("Return from the function `{}` [{}#line={}]", stringify!(#ident), file!(), line!()+1);
+            println!("入==>  `{}` [{}#line={}]", stringify!(#ident), file!(), line!()+1);
+            let inner = ||{
+                #block
+            };
+            let result = inner();
+            println!("<==出  `{}` [{}#line={}]", stringify!(#ident), file!(), line!()+1);
             return result;
         }
     };
