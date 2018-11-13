@@ -13,7 +13,7 @@ fn test_arg_ret(x: &str) -> &str {
 }
 
 #[trace_info]
-fn return_is_not_supported_now_T_T(x: &str) -> &str {
+fn return_is_supported(x: &str) -> &str {
     println!("test_arg_ret x = {}", x);
     return x;
 }
@@ -31,7 +31,7 @@ fn main() {
     let s = test_arg_ret("hoge");
     println!("s = {}", s);
 
-    let s = return_is_not_supported_now_T_T("fuga");
+    let s = return_is_supported("fuga");
     println!("s = {}", s);
 
     S::method_test();
@@ -40,14 +40,15 @@ fn main() {
 
 ## Output
 ```shell
-Enter into the function `test_arg_ret` [src/main.rs#line=5]
+入==>  `test_arg_ret` [src/main.rs#line=5]
 test_arg_ret x = hoge
-Return from the function `test_arg_ret` [src/main.rs#line=5]
+<==出  `test_arg_ret` [src/main.rs#line=5]
 s = hoge
-Enter into the function `return_is_not_supported_now_T_T` [src/main.rs#line=11]
+入==>  `return_is_not_supported_now_T_T` [src/main.rs#line=11]
 test_arg_ret x = fuga
+<==出  `return_is_not_supported_now_T_T` [src/main.rs#line=11]
 s = fuga
-Enter into the function `method_test` [src/main.rs#line=20]
+入==>  `method_test` [src/main.rs#line=20]
 S::method_test
-Return from the function `method_test` [src/main.rs#line=20]
+<==出  `method_test` [src/main.rs#line=20]
 ```
