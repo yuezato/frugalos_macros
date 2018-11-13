@@ -1,7 +1,7 @@
 # frugalos_macros
 
 # Examples
-## Example1
+## `trace_info` macro
 ```rust
 extern crate frugalos_macros;
 use frugalos_macros::trace_info;
