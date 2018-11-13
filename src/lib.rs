@@ -1,3 +1,4 @@
+#![recursion_limit = "128"]
 extern crate proc_macro;
 extern crate syn;
 #[macro_use]
@@ -5,7 +6,7 @@ extern crate quote;
 
 use proc_macro::TokenStream;
 
-#[cfg_attr(feature = "cargo-clippy", allow(clippy::needless_pass_by_value))]
+#[cfg_attr(feature = "cargo-clippy", allow(needless_pass_by_value))]
 #[proc_macro_attribute]
 pub fn trace_info(_args: TokenStream, input: TokenStream) -> TokenStream {
     let parsed: syn::ItemFn = syn::parse2(input.clone().into()).unwrap();
@@ -18,12 +19,17 @@ pub fn trace_info(_args: TokenStream, input: TokenStream) -> TokenStream {
 
     let expanded = quote! {
         #vis fn #ident(#inputs) #output {
-            println!("入==>  `{}` [{}#line={}]", stringify!(#ident), file!(), line!()+1);
+            let dir = env!("CARGO_MANIFEST_DIR");
+            let mut file_name = String::from(file!());
+            if !file_name.starts_with("/") {
+                file_name = format!("{}/{}", dir, file_name);
+            }
+            println!("入==>  `{}` [ {} #line={}]", stringify!(#ident), file_name, line!()+1);
             let inner = ||{
                 #block
             };
             let result = inner();
-            println!("<==出  `{}` [{}#line={}]", stringify!(#ident), file!(), line!()+1);
+            println!("<==出  `{}` [ {} #line={}]", stringify!(#ident), file_name, line!()+1);
             return result;
         }
     };
