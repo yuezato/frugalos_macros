@@ -1,0 +1,11 @@
+[package]
+name = "frugalos_macros"
+version = "0.1.0"
+authors = ["yuuya uezato <yuuya_uezato@dwango.co.jp>"]
+
+[dependencies]
+syn = { version = "0.15", features = ["full", "extra-traits"] }
+quote = "0.6"
+
+[lib]
+proc-macro = true
