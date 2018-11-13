@@ -40,15 +40,16 @@ fn main() {
 
 ## Output
 ```shell
-入==>  `test_arg_ret` [src/main.rs#line=5]
+入==>  `test_arg_ret` [ /Users/uezato/Rust/play_macros/src/main.rs #line=5]
 test_arg_ret x = hoge
-<==出  `test_arg_ret` [src/main.rs#line=5]
+<==出  `test_arg_ret` [ /Users/uezato/Rust/play_macros/src/main.rs #line=5]
 s = hoge
-入==>  `return_is_not_supported_now_T_T` [src/main.rs#line=11]
+入==>  `return_is_supported` [ /Users/uezato/Rust/play_macros/src/main.rs #line=11]
 test_arg_ret x = fuga
-<==出  `return_is_not_supported_now_T_T` [src/main.rs#line=11]
+<==出  `return_is_supported` [ /Users/uezato/Rust/play_macros/src/main.rs #line=11]
 s = fuga
-入==>  `method_test` [src/main.rs#line=20]
+入==>  `method_test` [ /Users/uezato/Rust/play_macros/src/main.rs #line=20]
 S::method_test
-<==出  `method_test` [src/main.rs#line=20]
+<==出  `method_test` [ /Users/uezato/Rust/play_macros/src/main.rs #line=20]
+
 ```
