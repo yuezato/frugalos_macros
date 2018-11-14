@@ -24,12 +24,12 @@ pub fn trace_info(_args: TokenStream, input: TokenStream) -> TokenStream {
             if !file_name.starts_with("/") {
                 file_name = format!("{}/{}", dir, file_name);
             }
-            println!("入==>  `{}` [ {} #line={}]", stringify!(#ident), file_name, line!()+1);
+            println!("入==>  `{}` [ {}:{} ]", stringify!(#ident), file_name, line!()+1);
             let inner = ||{
                 #block
             };
             let result = inner();
-            println!("<==出  `{}` [ {} #line={}]", stringify!(#ident), file_name, line!()+1);
+            println!("<==出  `{}` [ {}:{} ]", stringify!(#ident), file_name, line!()+1);
             return result;
         }
     };
