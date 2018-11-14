@@ -72,6 +72,7 @@ fi
 ```
 
 Next, please open the preferences of iTerm2 and change it as follows:
-<img width="919" alt="2018-11-14 14 25 26" src="https://user-images.githubusercontent.com/26326704/48461885-425cbb00-e819-11e8-96e6-2d4e396e88b6.png">
+<img width="900" src="https://user-images.githubusercontent.com/26326704/48461885-425cbb00-e819-11e8-96e6-2d4e396e88b6.png">
 
-Finally, you can open a file at a given line by your emacs with `command+clicking` on a file link !
+Finally, you can open a file at a given line by your emacs with `command+clicking` on a file link:
+<img width="900" src="https://user-images.githubusercontent.com/26326704/48462265-d9764280-e81a-11e8-9914-2d1856c19e52.png">
