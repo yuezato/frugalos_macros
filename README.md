@@ -102,3 +102,11 @@ Next, please open the preferences of iTerm2 and change it as follows:
 
 Finally, you can open a file at a given line by your emacs with `command+clicking` on a file link:
 <img width="900" src="https://user-images.githubusercontent.com/26326704/48462265-d9764280-e81a-11e8-9914-2d1856c19e52.png">
+
+Furthermore, to inherit your environment variables to emacs processes invoked from iTerm2, I write the following lines to my `.emacs`:
+```elisp
+;; https://github.com/purcell/exec-path-from-shell
+(when (memq window-system '(mac ns x))
+  (require 'exec-path-from-shell)
+  (exec-path-from-shell-initialize))
+```
