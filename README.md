@@ -12,6 +12,16 @@ fn test_arg_ret(x: &str) -> &str {
     x
 }
 
+#[trace_info(comment="This is a comment.")]
+fn comment_test1() {
+    println!("can you see the above comment?");
+}
+
+#[trace_info(comment="[This is another comment.]")]
+fn comment_test2() {
+    println!("can you see the above comment?");
+}
+
 #[trace_info]
 fn return_is_supported(x: &str) -> &str {
     println!("test_arg_ret x = {}", x);
@@ -31,6 +41,10 @@ fn main() {
     let s = test_arg_ret("hoge");
     println!("s = {}", s);
 
+    comment_test1();
+
+    comment_test2();
+    
     let s = return_is_supported("fuga");
     println!("s = {}", s);
 
@@ -40,18 +54,30 @@ fn main() {
 
 ## Output
 ```shell
-入==>  `test_arg_ret` [ /Users/uezato/Rust/play_macros/src/main.rs:5 ]
+/Users/yuuya_uezato/public_frugalos/play_macros$ cargo run
+   Compiling frugalos_macros v0.1.0 (/Users/yuuya_uezato/public_frugalos/frugalos_macros)
+   Compiling play_macros v0.1.0 (/Users/yuuya_uezato/public_frugalos/play_macros)
+    Finished dev [unoptimized + debuginfo] target(s) in 4.00s
+     Running `target/debug/play_macros`
+入==> `test_arg_ret` [ /Users/yuuya_uezato/public_frugalos/play_macros/src/main.rs:5 ]
 test_arg_ret x = hoge
-<==出  `test_arg_ret` [ /Users/uezato/Rust/play_macros/src/main.rs:5 ]
+<==出 `test_arg_ret` [ /Users/yuuya_uezato/public_frugalos/play_macros/src/main.rs:5 ]
 s = hoge
-入==>  `return_is_supported` [ /Users/uezato/Rust/play_macros/src/main.rs:11 ]
+入==> `comment_test1` [ /Users/yuuya_uezato/public_frugalos/play_macros/src/main.rs:11 ]
+      This is a comment.
+can you see the above comment?
+<==出 `comment_test1` [ /Users/yuuya_uezato/public_frugalos/play_macros/src/main.rs:11 ]
+入==> `comment_test2` [ /Users/yuuya_uezato/public_frugalos/play_macros/src/main.rs:16 ]
+      [This is another comment.]
+can you see the above comment?
+<==出 `comment_test2` [ /Users/yuuya_uezato/public_frugalos/play_macros/src/main.rs:16 ]
+入==> `return_is_supported` [ /Users/yuuya_uezato/public_frugalos/play_macros/src/main.rs:21 ]
 test_arg_ret x = fuga
-<==出  `return_is_supported` [ /Users/uezato/Rust/play_macros/src/main.rs:11 ]
+<==出 `return_is_supported` [ /Users/yuuya_uezato/public_frugalos/play_macros/src/main.rs:21 ]
 s = fuga
-入==>  `method_test` [ /Users/uezato/Rust/play_macros/src/main.rs:20 ]
+入==> `method_test` [ /Users/yuuya_uezato/public_frugalos/play_macros/src/main.rs:30 ]
 S::method_test
-<==出  `method_test` [ /Users/uezato/Rust/play_macros/src/main.rs:20 ]
-
+<==出 `method_test` [ /Users/yuuya_uezato/public_frugalos/play_macros/src/main.rs:30 ]
 ```
 
 
