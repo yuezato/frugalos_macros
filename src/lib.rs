@@ -51,7 +51,7 @@ pub fn trace_info(args: TokenStream, input: TokenStream) -> TokenStream {
 
                 println!("入==> `{}` [ {}:{} ]", stringify!(#ident), file_name, line!()+1);
                 println!("      {}", #comment);
-                let inner = ||{
+                let mut inner = move ||{
                     #block
                 };
                 let result = inner();
@@ -84,7 +84,7 @@ pub fn trace_info(args: TokenStream, input: TokenStream) -> TokenStream {
 
                 println!("入==> `{}` [ {}:{} ]", stringify!(#ident), file_name, line!()+1);
 
-                let inner = ||{
+                let mut inner = move ||{
                     #block
                 };
                 let result = inner();
