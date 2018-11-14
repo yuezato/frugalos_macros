@@ -30,10 +30,24 @@ pub fn trace_info(args: TokenStream, input: TokenStream) -> TokenStream {
         quote! {
             #vis fn #ident(#inputs) #output {
                 let dir = env!("CARGO_MANIFEST_DIR");
-                let mut file_name = String::from(file!());
-                if !file_name.starts_with("/") {
-                    file_name = format!("{}/{}", dir, file_name);
-                }
+                let file = file!();
+
+                let file_name =
+                    if file.starts_with("/") {
+                        file.to_string()
+                    } else {
+                        let mut split1: Vec<&str> = dir.split('/').collect();
+                        let mut split2: Vec<&str> = file.split('/').collect();
+                        for i in 0..split2.len() {
+                            if split1.get(split1.len()-1).unwrap() == split2.get(i).unwrap() {
+                                split1.pop().unwrap();
+                            } else {
+                                break;
+                            }
+                        }
+                        split1.append(&mut split2);
+                        split1.join("/").to_string()
+                    };
 
                 println!("入==> `{}` [ {}:{} ]", stringify!(#ident), file_name, line!()+1);
                 println!("      {}", #comment);
@@ -49,10 +63,24 @@ pub fn trace_info(args: TokenStream, input: TokenStream) -> TokenStream {
         quote! {
             #vis fn #ident(#inputs) #output {
                 let dir = env!("CARGO_MANIFEST_DIR");
-                let mut file_name = String::from(file!());
-                if !file_name.starts_with("/") {
-                    file_name = format!("{}/{}", dir, file_name);
-                }
+                let file = file!();
+
+                let file_name =
+                    if file.starts_with("/") {
+                        file.to_string()
+                    } else {
+                        let mut split1: Vec<&str> = dir.split('/').collect();
+                        let mut split2: Vec<&str> = file.split('/').collect();
+                        for i in 0..split2.len() {
+                            if split1.get(split1.len()-1).unwrap() == split2.get(i).unwrap() {
+                                split1.pop().unwrap();
+                            } else {
+                                break;
+                            }
+                        }
+                        split1.append(&mut split2);
+                        split1.join("/").to_string()
+                    };
 
                 println!("入==> `{}` [ {}:{} ]", stringify!(#ident), file_name, line!()+1);
 
