@@ -40,16 +40,38 @@ fn main() {
 
 ## Output
 ```shell
-入==>  `test_arg_ret` [ /Users/uezato/Rust/play_macros/src/main.rs #line=5]
+入==>  `test_arg_ret` [ /Users/uezato/Rust/play_macros/src/main.rs:5 ]
 test_arg_ret x = hoge
-<==出  `test_arg_ret` [ /Users/uezato/Rust/play_macros/src/main.rs #line=5]
+<==出  `test_arg_ret` [ /Users/uezato/Rust/play_macros/src/main.rs:5 ]
 s = hoge
-入==>  `return_is_supported` [ /Users/uezato/Rust/play_macros/src/main.rs #line=11]
+入==>  `return_is_supported` [ /Users/uezato/Rust/play_macros/src/main.rs:11 ]
 test_arg_ret x = fuga
-<==出  `return_is_supported` [ /Users/uezato/Rust/play_macros/src/main.rs #line=11]
+<==出  `return_is_supported` [ /Users/uezato/Rust/play_macros/src/main.rs:11 ]
 s = fuga
-入==>  `method_test` [ /Users/uezato/Rust/play_macros/src/main.rs #line=20]
+入==>  `method_test` [ /Users/uezato/Rust/play_macros/src/main.rs:20 ]
 S::method_test
-<==出  `method_test` [ /Users/uezato/Rust/play_macros/src/main.rs #line=20]
+<==出  `method_test` [ /Users/uezato/Rust/play_macros/src/main.rs:20 ]
 
 ```
+
+
+## Settings
+### For Mac & iTerm2 & Emacs Users
+First, please save the following file into "your/favarite/path/emacs_for_iterm2"
+```shell
+#!/bin/bash
+
+file=$1
+line=$2
+
+if [ "$line" = "" ]; then
+ /usr/local/bin/emacs $file &
+else
+ /usr/local/bin/emacs +$line $file &
+fi
+```
+
+Next, please open the preferences of iTerm2 and change it as follows:
+<img width="919" alt="2018-11-14 14 25 26" src="https://user-images.githubusercontent.com/26326704/48461885-425cbb00-e819-11e8-96e6-2d4e396e88b6.png">
+
+Finally, you can open a file at a given line by your emacs with `command+clicking` on a file link !
