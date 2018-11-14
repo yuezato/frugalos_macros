@@ -6,6 +6,7 @@ authors = ["yuuya uezato <yuuya_uezato@dwango.co.jp>"]
 [dependencies]
 syn = { version = "0.15", features = ["full", "extra-traits"] }
 quote = "0.6"
+regex = "1"
 
 [lib]
 proc-macro = true
