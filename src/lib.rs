@@ -49,13 +49,13 @@ pub fn trace_info(args: TokenStream, input: TokenStream) -> TokenStream {
                         split1.join("/").to_string()
                     };
 
-                println!("入==> `{}` [ {}:{} ]", stringify!(#ident), file_name, line!()+1);
+                println!("入==> `{}::{}` [ {}:{} ]", module_path!(), stringify!(#ident), file_name, line!()+1);
                 println!("      {}", #comment);
                 let mut inner = move ||{
                     #block
                 };
                 let result = inner();
-                    println!("<==出 `{}` [ {}:{} ]", stringify!(#ident), file_name, line!()+1);
+                    println!("<==出 `{}::{}` [ {}:{} ]", module_path!(), stringify!(#ident), file_name, line!()+1);
                 return result;
             }
         }
@@ -82,13 +82,13 @@ pub fn trace_info(args: TokenStream, input: TokenStream) -> TokenStream {
                         split1.join("/").to_string()
                     };
 
-                println!("入==> `{}` [ {}:{} ]", stringify!(#ident), file_name, line!()+1);
+                println!("入==> `{}::{}` [ {}:{} ]", module_path!(), stringify!(#ident), file_name, line!()+1);
 
                 let mut inner = move ||{
                     #block
                 };
                 let result = inner();
-                println!("<==出 `{}` [ {}:{} ]", stringify!(#ident), file_name, line!()+1);
+                println!("<==出 `{}::{}` [ {}:{} ]", module_path!(), stringify!(#ident), file_name, line!()+1);
                 return result;
             }
         }
